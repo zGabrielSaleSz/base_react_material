@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Alert from '@mui/material/Alert';
 
+import Login from './components/pages/credentials/Login';
+import Development from './components/pages/Development';
+import Homepage from './components/pages/Homepage';
+import Application from './components/pages/application/Application';
+import NotFound from './components/pages/NotFound';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2E7B9E',
+      main: 'rgb(193, 33, 39)',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#82C9DB',
+      main: '#F8861A',
       contrastText: '#fff',
-    },
-    tertiary: {
-      main: '#C4E6EF',
-      contrastText: '#595959'
     },
     neutral: {
       main: '#64748B',
@@ -58,15 +55,25 @@ const theme = createTheme({
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Alert variant="outlined" severity="success">
-          Boa sorte com seu novo app :D
-        </Alert>
-        <img src={logo} height="50" width="50" className="App-logo" alt="logo" />
-        
-      </header>
-    </div>
+    <ThemeProvider theme= { theme } >
+       <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route exact path="/dev">
+            <Development />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/panel">
+            <Application />
+          </Route>
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Router>
+    </ThemeProvider>  
   );
 }
 
